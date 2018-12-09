@@ -15,7 +15,7 @@ var config = require('../test-config');
 var Bitcore = require('bitcore-lib');
 var Bitcore_ = {
   btc: Bitcore,
-  bch: require('bitcore-lib-cash')
+  ltz: require('bitcore-lib-litecoinz')
 };
 
 
@@ -446,7 +446,7 @@ console.log('[server.js.425:err:]',err); //TODO
 
     it('should create wallet for another coin', function(done) {
       var opts = {
-        coin: 'bch',
+        coin: 'ltz',
         name: 'my wallet',
         m: 2,
         n: 3,
@@ -456,7 +456,7 @@ console.log('[server.js.425:err:]',err); //TODO
         should.not.exist(err);
         server.storage.fetchWallet(walletId, function(err, wallet) {
           should.not.exist(err);
-          wallet.coin.should.equal('bch');
+          wallet.coin.should.equal('ltz');
           done();
         });
       });
@@ -681,7 +681,7 @@ console.log('[server.js.425:err:]',err); //TODO
           name: 'me',
           xPubKey: TestData.copayers[0].xPubKey_44H_0H_0H,
           requestPubKey: TestData.copayers[0].pubKey_1H_0,
-          coin: 'bch',
+          coin: 'ltz',
         });
         server.joinWallet(copayerOpts, function(err) {
           should.exist(err);
@@ -1313,10 +1313,10 @@ console.log('[server.js.425:err:]',err); //TODO
     });
 
 
-    describe('shared wallets (BIP44/BCH)', function() {
+    describe('shared wallets (BIP44/LTZ)', function() {
       beforeEach(function(done) {
         helpers.createAndJoinWallet(2, 2, {
-          coin: 'bch'
+          coin: 'ltz'
         }, function(s, w) {
           server = s;
           wallet = w;
@@ -1334,7 +1334,7 @@ console.log('[server.js.425:err:]',err); //TODO
           address.isChange.should.be.false;
           address.path.should.equal('m/0/0');
           address.type.should.equal('P2SH');
-          address.coin.should.equal('bch');
+          address.coin.should.equal('ltz');
           server.getNotifications({}, function(err, notifications) {
             should.not.exist(err);
             var notif = _.find(notifications, {
@@ -1382,10 +1382,10 @@ console.log('[server.js.425:err:]',err); //TODO
       });
     });
 
-    describe('shared wallets (BIP44/BCH)', function() {
+    describe('shared wallets (BIP44/LTZ)', function() {
       beforeEach(function(done) {
         helpers.createAndJoinWallet(2, 2, {
-          coin: 'bch'
+          coin: 'ltz'
         }, function(s, w) {
           server = s;
           wallet = w;
@@ -1403,7 +1403,7 @@ console.log('[server.js.425:err:]',err); //TODO
           address.isChange.should.be.false;
           address.path.should.equal('m/0/0');
           address.type.should.equal('P2SH');
-          address.coin.should.equal('bch');
+          address.coin.should.equal('ltz');
           server.getNotifications({}, function(err, notifications) {
             should.not.exist(err);
             var notif = _.find(notifications, {
@@ -1452,10 +1452,10 @@ console.log('[server.js.425:err:]',err); //TODO
     });
 
 
-    describe('1-1 wallet (BIP44/BCH/Testnet)', function() {
+    describe('1-1 wallet (BIP44/LTZ/Testnet)', function() {
       beforeEach(function(done) {
         helpers.createAndJoinWallet(1, 1, {
-          coin: 'bch',
+          coin: 'ltz',
           network: 'testnet',
         }, function(s, w) {
           server = s;
@@ -1474,7 +1474,7 @@ console.log('[server.js.425:err:]',err); //TODO
           address.isChange.should.be.false;
           address.path.should.equal('m/0/0');
           address.type.should.equal('P2PKH');
-          address.coin.should.equal('bch');
+          address.coin.should.equal('ltz');
           server.getNotifications({}, function(err, notifications) {
             should.not.exist(err);
             var notif = _.find(notifications, {
@@ -2103,12 +2103,12 @@ console.log('[server.js.425:err:]',err); //TODO
       helpers.stubUtxos(server, wallet, 1, function() {
         var spy = sinon.spy(server, '_getBlockchainExplorer');
         server.getBalance({
-          coin: 'bch'
+          coin: 'ltz'
         }, function(err, balance) {
           should.not.exist(err);
           should.exist(balance);
           var args = spy.getCalls()[0].args;
-          args[0].should.equal('bch');
+          args[0].should.equal('ltz');
           done();
         });
       });
@@ -3103,10 +3103,10 @@ console.log('[server.js.425:err:]',err); //TODO
       server.getFeeLevels({}, function(err, fees, fromCache) {
         should.not.exist(err);
         should.not.exist(fromCache);
-        server.getFeeLevels({coin:'bch'}, function(err, fees, fromCache) {
+        server.getFeeLevels({coin:'ltz'}, function(err, fees, fromCache) {
           should.not.exist(err);
           should.not.exist(fromCache);
-          server.getFeeLevels({coin:'bch', network:'testnet'}, function(err, fees, fromCache) {
+          server.getFeeLevels({coin:'ltz', network:'testnet'}, function(err, fees, fromCache) {
             should.not.exist(err);
             should.not.exist(fromCache);
             done();
@@ -3190,15 +3190,15 @@ console.log('[server.js.425:err:]',err); //TODO
 
   var addrMap = {
     btc: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
-    bch: 'CPrtPWbp8cCftTQu5fzuLG5zPJNDHMMf8X',
+    ltz: 'CPrtPWbp8cCftTQu5fzuLG5zPJNDHMMf8X',
   }
 
   var idKeyMap = {
       btc: 'id44btc',
-      bch: 'id44bch',
+      ltz: 'id44ltz',
   };
 
-  _.each(['bch', 'btc'], function(coin) {
+  _.each(['ltz', 'btc'], function(coin) {
   
     describe('#createTx ' + coin, function() {
       var addressStr, idKey;
@@ -3379,7 +3379,7 @@ console.log('[server.js.425:err:]',err); //TODO
                 should.exist(tx);
                 var t = tx.getBitcoreTx();
 
-                if (coin == 'bch') { 
+                if (coin == 'ltz') {
                   t.getChangeOutput().script.toAddress().toLegacyAddress().should.equal(txOpts.changeAddress);
                 } else {
                   t.getChangeOutput().script.toAddress().toString().should.equal(txOpts.changeAddress);
@@ -8577,7 +8577,7 @@ console.log('[server.js.425:err:]',err); //TODO
     });
   });
 
-  describe('BTC & BCH wallets with same seed', function() {
+  describe('BTC & LTZ wallets with same seed', function() {
     var server = {},
       wallet = {};
     beforeEach(function(done) {
@@ -8586,11 +8586,11 @@ console.log('[server.js.425:err:]',err); //TODO
         wallet.btc = w;
         w.copayers[0].id.should.equal(TestData.copayers[0].id44btc);
         helpers.createAndJoinWallet(1, 1, {
-          coin: 'bch'
+          coin: 'ltz'
         }, function(s, w) {
-          server.bch = s;
-          wallet.bch = w;
-          w.copayers[0].id.should.equal(TestData.copayers[0].id44bch);
+          server.ltz = s;
+          wallet.ltz = w;
+          w.copayers[0].id.should.equal(TestData.copayers[0].id44ltz);
           done();
         });
       });
@@ -8604,11 +8604,11 @@ console.log('[server.js.425:err:]',err); //TODO
         address.coin.should.equal('btc');
         address.network.should.equal('livenet');
         address.address.should.equal('1L3z9LPd861FWQhf3vDn89Fnc9dkdBo2CG');
-        server.bch.createAddress({}, function(err, address) {
+        server.ltz.createAddress({}, function(err, address) {
           should.not.exist(err);
           should.exist(address);
-          address.walletId.should.equal(wallet.bch.id);
-          address.coin.should.equal('bch');
+          address.walletId.should.equal(wallet.ltz.id);
+          address.coin.should.equal('ltz');
           address.network.should.equal('livenet');
           address.address.should.equal('CbWsiNjh18ynQYc5jfYhhespEGrAaW8YUq');
           server.btc.getMainAddresses({}, function(err, addresses) {
@@ -8617,11 +8617,11 @@ console.log('[server.js.425:err:]',err); //TODO
             addresses[0].coin.should.equal('btc');
             addresses[0].walletId.should.equal(wallet.btc.id);
             addresses[0].address.should.equal('1L3z9LPd861FWQhf3vDn89Fnc9dkdBo2CG');
-            server.bch.getMainAddresses({}, function(err, addresses) {
+            server.ltz.getMainAddresses({}, function(err, addresses) {
               should.not.exist(err);
               addresses.length.should.equal(1);
-              addresses[0].coin.should.equal('bch');
-              addresses[0].walletId.should.equal(wallet.bch.id);
+              addresses[0].coin.should.equal('ltz');
+              addresses[0].walletId.should.equal(wallet.ltz.id);
               addresses[0].address.should.equal('CbWsiNjh18ynQYc5jfYhhespEGrAaW8YUq');
               done();
             });

@@ -136,8 +136,8 @@ describe('Utils', function() {
     it('should identify btc as coin for 1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', function() {
       Utils.getAddressCoin('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA').should.equal('btc');
     });
-    it('should identify bch as coin for CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz', function() {
-      Utils.getAddressCoin('CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz').should.equal('bch');
+    it('should identify ltz as coin for L1Ucd8BU7KfeoGWXFjgwerQHVHQS6uMVzfA', function() {
+      Utils.getAddressCoin('L1Ucd8BU7KfeoGWXFjgwerQHVHQS6uMVzfA').should.equal('ltz');
     });
     it('should return null for 1L', function() {
       should.not.exist(Utils.getAddressCoin('1L'));
@@ -205,18 +205,18 @@ describe('Utils', function() {
 
 
   describe('#translateAddress', function() {
-    it('should translate address from btc to bch', function() {
-      var res = Utils.translateAddress('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'bch');
-      res.should.equal('CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz');
+    it('should translate address from btc to ltz', function() {
+      var res = Utils.translateAddress('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'ltz');
+      res.should.equal('L1Ucd8BU7KfeoGWXFjgwerQHVHQS6uMVzfA');
     });
-    it('should translate address from bch to btc', function() {
+    it('should translate address from ltz to btc', function() {
       var res = Utils.translateAddress('HBf8isgS8EXG1r3X6GP89FmooUmiJ42wHS', 'btc');
       res.should.equal('36q2G5FMGvJbPgAVEaiyAsFGmpkhPKwk2r');
     });
  
-    it('should keep the address if there is nothing to do (bch)', function() {
-      var res = Utils.translateAddress('CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz', 'bch');
-      res.should.equal('CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz');
+    it('should keep the address if there is nothing to do (ltz)', function() {
+      var res = Utils.translateAddress('L1Ucd8BU7KfeoGWXFjgwerQHVHQS6uMVzfA', 'ltz');
+      res.should.equal('L1Ucd8BU7KfeoGWXFjgwerQHVHQS6uMVzfA');
     });
     it('should keep the address if there is nothing to do (btc)', function() {
       var res = Utils.translateAddress('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'btc');

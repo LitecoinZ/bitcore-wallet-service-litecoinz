@@ -62,9 +62,9 @@ describe('Email notifications', function() {
                     livenet: 'https://insight.bitpay.com/tx/{{txid}}',
                     testnet: 'https://test-insight.bitpay.com/tx/{{txid}}',
                   },
-                  bch: {
-                    livenet: 'https://bch-insight.bitpay.com/#/tx/{{txid}}',
-                    testnet: 'https://test-bch-insight.bitpay.com/#/tx/{{txid}}',
+                  ltz: {
+                    livenet: 'https://insight.litecoinz.org/#/tx/{{txid}}',
+                    testnet: 'https://test-insight.litecoinz.org/#/tx/{{txid}}',
                   }
                 },
               },
@@ -176,7 +176,7 @@ describe('Email notifications', function() {
             txp = t;
             async.eachSeries(_.range(2), function(i, next) {
               var copayer = TestData.copayers[i];
-              helpers.getAuthServer(copayer.id44btc, function(server) {
+              helpers.getAuthServer(copayer.id44ltz, function(server) {
                 var signatures = helpers.clientSign(txp, copayer.xPrivKey_44H_0H_0H);
                 server.signTx({
                   txProposalId: txp.id,
@@ -242,7 +242,7 @@ describe('Email notifications', function() {
             txpId = txp.id;
             async.eachSeries(_.range(1, 3), function(i, next) {
               var copayer = TestData.copayers[i];
-              helpers.getAuthServer(copayer.id44btc, function(server) {
+              helpers.getAuthServer(copayer.id44ltz, function(server) {
                 server.rejectTx({
                   txProposalId: txp.id,
                 }, next);
@@ -375,7 +375,7 @@ describe('Email notifications', function() {
       server.savePreferences({
         email: 'copayer1@domain.com',
         language: 'es',
-        unit: 'btc',
+        unit: 'ltz',
       }, function(err) {
         server.createAddress({}, function(err, address) {
           should.not.exist(err);
@@ -521,9 +521,9 @@ describe('Email notifications', function() {
                     livenet: 'https://insight.bitpay.com/tx/{{txid}}',
                     testnet: 'https://test-insight.bitpay.com/tx/{{txid}}',
                   },
-                  bch: {
-                    livenet: 'https://bch-insight.bitpay.com/#/tx/{{txid}}',
-                    testnet: 'https://test-bch-insight.bitpay.com/#/tx/{{txid}}',
+                  ltz: {
+                    livenet: 'https://insight.litecoinz.org/#/tx/{{txid}}',
+                    testnet: 'https://test-insight.litecoinz.org/#/tx/{{txid}}',
                   }
                 },
               },

@@ -50,25 +50,21 @@ var config = {
         // url: ['http://a.b.c', 'https://test-insight.bitpay.com:443'],
       },
     },
-    bch: {
+    ltz: {
       livenet: {
         provider: 'insight',
-        //url: 'https://cashexplorer.bitcoin.com',
-        url: 'https://bch-insight.bitpay.com:443',
-        addressFormat: 'cashaddr',  // copay, cashaddr, or legacy
+        url: 'https://insight.litecoinz.org:443',
       },
       testnet: {
         provider: 'insight',
-        url: 'https://test-bch-insight.bitpay.com:443',
-        addressFormat: 'cashaddr',  // copay, cashaddr, or legacy
+        url: 'https://test-insight.litecoinz.org:443',
       },
-
     },
   },
   pushNotificationsOpts: {
     templatePath: './lib/templates',
     defaultLanguage: 'en',
-    defaultUnit: 'btc',
+    defaultUnit: 'ltz',
     subjectPrefix: '',
     pushServerUrl: 'https://fcm.googleapis.com/fcm',
     authorizationKey: 'You_have_to_put_something_here',
@@ -83,18 +79,18 @@ var config = {
   //  port: 25,
   //  ignoreTLS: true,
   //  subjectPrefix: '[Wallet Service]',
-  //  from: 'wallet-service@bitcore.io',
+  //  from: 'wallet-service@litecoinz.org',
   //  templatePath: './lib/templates',
   //  defaultLanguage: 'en',
-  //  defaultUnit: 'btc',
+  //  defaultUnit: 'ltz',
   //  publicTxUrlTemplate: {
   //    btc: {
   //      livenet: 'https://insight.bitpay.com/tx/{{txid}}',
   //      testnet: 'https://test-insight.bitpay.com/tx/{{txid}}',
   //    },
-  //    bch: {
-  //      livenet: 'https://bch-insight.bitpay.com/#/tx/{{txid}}',
-  //      testnet: 'https://test-bch-insight.bitpay.com/#/tx/{{txid}}',
+  //    ltz: {
+  //      livenet: 'https://insight.litecoinz.org/#/tx/{{txid}}',
+  //      testnet: 'https://test-insight.litecoinz.org/#/tx/{{txid}}',
   //    }
   //  },
   // },
